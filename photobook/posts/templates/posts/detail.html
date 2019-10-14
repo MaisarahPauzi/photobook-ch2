@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block content %}
+<div class="post-detail">
+  <div style="flex-direction: column; padding-bottom: 0px; padding-top: 0px;">
+    <article class="single-post">
+      <header class="post-head">
+        <div class="img-post-user">
+          <canvas height="53" width="53"
+            style="position: absolute; top: -5px; left: -5px; width: 42px; height: 42px;"></canvas>
+          <a href="#" class="img-post-user-img" style="width: 32px; height: 32px;">
+            {% comment %} link user image {% endcomment %}
+          </a>
+        </div>
+        <div class="post-user-username">
+          <div class="post-user-link">
+            <a href="#" class="post-user-a">{{ post.user }}</a>
+          </div>
+        </div>
+      </header>
+      <div class="post-image">
+        <a href="{{ post.get_absolute_url }}">
+          <img src="{{ post.image.url }}" class="post-image-img">
+        </a>
+      </div>
+      <div class="about-post">
+        <div class="post-title">
+          <a href="{{ post.get_absolute_url }}" class="post-title-a">{{ post.title }}</a>
+        </div>
+        <div class="post-content">
+          <div class="post-caption">
+            {{ post.caption }}
+          </div>
+        </div>
+      </div>
+      <div class="post-delete">
+        <button class="btn btn-primary post-edit"><a href="{% url 'post_edit' post.pk %}">Edit</a></button>
+        <a href="{% url 'post_delete' post.pk %}"><i class="fa fa-close" style="font-size:40px;color:red"></i></a>
+      </div>
+    </article>
+  </div>
+</div>
+{% endblock content %}

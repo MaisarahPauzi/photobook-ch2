@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Photobook{% endblock title %}
+
+{% block content %}
+<div class="post">
+  <div style="flex-direction: column; padding-bottom: 100px; padding-top: 0px;">
+
+    <div class="create-new-post-btn">
+      <a href="{% url 'post_create' %}"><i class="fa fa-pencil-square-o" style="font-size:48px;color:green"></i></a>
+    </div>
+
+    {% for post in posts %}
+    <article class="single-post">
+      <header class="post-head">
+        <div class="img-post-user">
+          <canvas height="53" width="53"
+            style="position: absolute; top: -5px; left: -5px; width: 42px; height: 42px;"></canvas>
+          <a href="#" class="img-post-user-img" style="width: 32px; height: 32px;">
+            {% comment %} link user image {% endcomment %}
+          </a>
+        </div>
+        <div class="post-user-username">
+          <div class="post-user-link">
+            <a href="#" class="post-user-a">{{ post.user }}</a>
+          </div>
+        </div>
+      </header>
+      <div class="post-image">
+        <a href="{{ post.get_absolute_url }}">
+          <img src="{{ post.image.url }}" class="post-image-img">
+        </a>
+      </div>
+      <div class="about-post">
+        <div class="post-title">
+          <a href="{{ post.get_absolute_url }}" class="post-title-a">{{ post.title }}</a>
+        </div>
+        <div class="post-content">
+          <div class="post-caption">
+            {{ post.caption }}
+          </div>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% comment %} <h1>Feed</h1>
+<div id="image-list">
+  {% for post in posts %}
+  <div class="image">
+    <a href="#">
+      <img src="{{ post.image.url }}">
+    </a>
+    <div class="info">
+      <a href="#" class="title">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.caption }}</p>
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div> {% endcomment %}
+{% endblock content %}
